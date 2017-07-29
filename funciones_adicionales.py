@@ -36,7 +36,7 @@ def reserva_primera_clase(input_line, weekday, wait_time, position_class=None):
     init_cont = 0
     while init_cont < 10:
         try:
-            browser = Browser('chrome')
+            browser = Browser()
             init_cont = 10
         except:
             init_cont += 1
