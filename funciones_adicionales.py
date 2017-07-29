@@ -29,10 +29,33 @@ def wait_until_00():
             time.sleep(3)
 
 
+def wait_until_22():
+    while True:
+        actual_time = datetime.datetime.today()
+        if actual_time.hour == 22:
+            return
+        else:
+            time.sleep(3)
+
+
+def wait_until_2158():
+    while True:
+        actual_time = datetime.datetime.today()
+        if (actual_time.hour == 21 and actual_time.minute >= 58) or actual_time.hour >= 21:
+            return
+        else:
+            time.sleep(3)
+
+
 def reserva_primera_clase(input_line, weekday, wait_time, position_class=None):
 
     if position_class is None:
         position_class = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    logger.info('Waiting until 2 minutes before')
+    wait_until_2158()
+    logger.info('Its time to start')
+
     init_cont = 0
     while init_cont < 10:
         try:
@@ -109,7 +132,7 @@ def reserva_primera_clase(input_line, weekday, wait_time, position_class=None):
             button = browser.find_by_text('RESERVAR')[position_class[weekday + 6]]
 
             logger.info('Waiting until midnight')
-            wait_until_00()
+            wait_until_22()
 
             logger.info('Waiting a few seconds')
             time.sleep(wait_time)
