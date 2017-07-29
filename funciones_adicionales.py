@@ -7,6 +7,22 @@ list_days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Dom
              'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
 
 
+def instance_name():
+    import sys
+    from boto.ec2.connection import EC2Connection
+
+    if len(sys.argv) != 2:
+        print "Please provide instance ID"
+        sys.exit(1)
+
+    c = EC2Connection()
+    r = c.get_all_instances([sys.argv[1], ])
+    try:
+        print r[0].instances[0].tags['Name']
+    except:
+        sys.exit(1)
+
+
 def wait_until_text_present(browser, txt, waiting_time=120):
 
     cont = 0
