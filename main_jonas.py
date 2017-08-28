@@ -20,7 +20,7 @@ display.start()
 
 def main():
     line = "juanfrcarro@gmail.com|jonas47352436j"
-    position_class = [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1]
+    position_class = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     wait_time = 6
     weekday = datetime.datetime.today().weekday()
     reserva_primera_clase(line, weekday, wait_time, position_class)

@@ -3,6 +3,7 @@ import time
 import random
 import datetime
 from funciones_adicionales import reserva_primera_clase
+
 import logging
 
 logging.basicConfig(filemode='w', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -18,11 +19,11 @@ display.start()
 
 
 def main():
-    line = "yuhp14@hotmail.com|25Jan2013%"
-    wait_time = 2
-    position_class = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    line = "ristotapani@gmail.com|poikanen"
+    position_class = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    wait_time = 6
     weekday = datetime.datetime.today().weekday()
-    reserva_primera_clase(line, weekday, wait_time, position_class )
+    reserva_primera_clase(line, weekday, wait_time, position_class)
 
 
 main()
