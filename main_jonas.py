@@ -3,8 +3,8 @@ import time
 import random
 import datetime
 from funciones_adicionales import reserva_primera_clase
-
 import logging
+from profiles import get_profiles
 
 logging.basicConfig(filemode='w', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -20,8 +20,10 @@ display.start()
 
 def main():
     line = "juanfrcarro@gmail.com|jonas47352436j"
-    position_class = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     wait_time = 6
+    profiles, assign_profiles = get_profiles()
+    single_profile = profiles[assign_profiles['jonas']]
+    position_class = single_profile + single_profile
     weekday = datetime.datetime.today().weekday()
     reserva_primera_clase(line, weekday, wait_time, position_class)
 
