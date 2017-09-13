@@ -1,11 +1,11 @@
 def get_profiles():
-    profiles = {'k7': [1, 0, 0, 0, 0, 0, 0],
-                'k8': [2, 1, 1, 1, 3, 0, 0],
-                'k7_haltero': [0, 0, 0, 0, 1, 0, 0],
-                'k8_haltero': [3, 1, 1, 1, 2, 0, 0],
-                'alvaro': [11, 0, 0, 0, 0, 0, 0]}
+    profiles = {'k7': [1, 0, 0, 0, 1, 0, 0],
+                'k8': [2, 1, 1, 1, 2, 0, 0],
+                'k7_haltero': [0, 0, 0, 0, 0, 0, 0],
+                'k8_haltero': [3, 1, 1, 1, 3, 0, 0],
+                'alvaro': [11, 0, 0, 0, 1, 0, 0]}
 
-    assign_profiles = {'alberto': 'k7_haltero',
+    assign_profiles = {'alberto': 'k8_haltero',
                        'alvaro': 'alvaro',
                        'amaya': 'k7',
                        'ana': 'k7_haltero',
