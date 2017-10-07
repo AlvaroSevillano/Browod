@@ -2,6 +2,7 @@ from splinter import Browser
 import time
 import datetime
 import logging as logger
+from profiles import get_profiles
 
 list_days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo',
              'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
@@ -63,10 +64,10 @@ def wait_until_2158():
             time.sleep(3)
 
 
-def reserva_primera_clase(input_line, weekday, wait_time, position_class=None):
+def reserva_clase(name):
 
-    if position_class is None:
-        position_class = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    weekday = datetime.datetime.today().weekday()
+    int_time, list_prefix, input_line, wait_time = get_profiles(name)
 
     logger.info('Waiting until 2 minutes before')
     wait_until_2158()
@@ -130,46 +131,44 @@ def reserva_primera_clase(input_line, weekday, wait_time, position_class=None):
 
         logger.info('Waiting 25 seconds for everything correct')
         time.sleep(25)
-        button = browser.find_by_text('LISTA ESPERA')
-        if len(button) > 0:
-            logger.info('LISTA ESPERA found')
-            button.click()
-            if wait_until_text_present(browser, 'ESPERANDO', waiting_time=10):
-                print 'Error en la reserva lista espera'
+
+        ok = False
+        for prefix in list_prefix:
+
+            button = browser.find_by_xpath('//tr[td[contains(text(), \'{prefix}\')] and '
+                                                'td[contains(text(), \'{int_time}\')]]//td[5]'.
+                                                format(prefix=prefix, int_time=int_time))
+            if len(button)>0:
+                button = button[0]
+                ok = True
+                break
+
+        if not ok:
+            logger.error('Configuracion no encontrada')
+            browser.quit()
+            return
+
+        logger.info('Waiting until midnight')
+        wait_until_22()
+
+        logger.info('Waiting a few seconds')
+        time.sleep(wait_time)
+
+        cont = 0
+
+        logger.info('Pushing button to make reservation')
+        button.click()
+        if wait_until_text_present(browser, 'RESERVADA', waiting_time=20):
+            if wait_until_text_present(browser, 'ESPERANDO', waiting_time=3):
                 cont += 1
+                print logger.error('Error in last step of reservation')
             else:
-                print 'Reserva en la lista de espera'
+                print logger.info('Reservation is in LISTA DE ESPERA')
                 return
-            browser.visit(url_out)
-            time.sleep(5)
-
         else:
-            logger.info('LISTA ESPERA not found')
-            button = browser.find_by_text('RESERVAR')[position_class[weekday + 6]]
-
-            logger.info('Waiting until midnight')
-            wait_until_22()
-
-            logger.info('Waiting a few seconds')
-            time.sleep(wait_time)
-
-            cont = 0
-
-            logger.info('Pushing button to make reservation')
-            button.click()
-            if wait_until_text_present(browser, 'RESERVADA', waiting_time=20):
-                if wait_until_text_present(browser, 'ESPERANDO', waiting_time=3):
-                    cont += 1
-                    print logger.error('Error in last step of reservation')
-                else:
-                    print logger.info('Reservation is in LISTA DE ESPERA')
-                    return
-            else:
-                logger.info('Reservation is ok')
-                return
-            browser.visit(url_out)
-            time.sleep(10)
-
-        wait_until_00()
+            logger.info('Reservation is ok')
+            return
+        browser.visit(url_out)
+        time.sleep(10)
 
     browser.quit()
