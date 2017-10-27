@@ -152,7 +152,7 @@ def reserva_clase(name):
         wait_until_22()
 
         logger.info('Waiting a few seconds')
-        time.sleep(wait_time)
+        time.sleep(wait_time+10)
 
         cont = 0
 
