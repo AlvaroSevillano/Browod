@@ -1,6 +1,7 @@
 from splinter import Browser
 import time
 import datetime
+import pytz
 import logging as logger
 from profiles import get_profiles
 
@@ -55,6 +56,22 @@ def wait_until_22():
             time.sleep(3)
 
 
+def wait_until_00_madrid():
+    while True:
+        actual_time = datetime.datetime.now(pytz.timezone('Europe/Madrid'))
+        if actual_time.hour == 00:
+            return
+        else:
+            time.sleep(3)
+
+def wait_until_2358_madrid():
+    while True:
+        actual_time = datetime.datetime.now(pytz.timezone('Europe/Madrid'))
+        if (actual_time.hour == 21 and actual_time.minute >= 58) or actual_time.hour >= 21:
+            return
+        else:
+            time.sleep(3)
+
 def wait_until_2158():
     while True:
         actual_time = datetime.datetime.today()
@@ -70,7 +87,7 @@ def reserva_clase(name):
     int_time, list_prefix, input_line, wait_time = get_profiles(name)
 
     logger.info('Waiting until 2 minutes before')
-    wait_until_2158()
+    wait_until_2358_madrid()
     logger.info('Its time to start')
 
     init_cont = 0
@@ -149,7 +166,7 @@ def reserva_clase(name):
             return
 
         logger.info('Waiting until midnight')
-        wait_until_22()
+        wait_until_00_madrid()
 
         logger.info('Waiting a few seconds')
         time.sleep(wait_time+10)
