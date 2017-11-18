@@ -90,12 +90,15 @@ def reserva_clase(name):
     wait_until_2358_madrid()
     logger.info('Its time to start')
 
+    logger.info('Trying Browser')
+    browser = Browser()
     init_cont = 0
     while init_cont < 10:
         try:
-            browser = Browser()
-            init_cont = 10
+            browser.visit('https://www.google.com')
+            break
         except:
+            time.sleep(1)
             init_cont += 1
 
     email, password = input_line.split('|')
