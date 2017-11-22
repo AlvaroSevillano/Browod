@@ -87,7 +87,7 @@ def reserva_clase(name):
     int_time, list_prefix, input_line, wait_time = get_profiles(name)
 
     logger.info('Waiting until 2 minutes before')
-    wait_until_2358_madrid()
+    # wait_until_2358_madrid()
     logger.info('Its time to start')
 
     logger.info('Trying Browser')
