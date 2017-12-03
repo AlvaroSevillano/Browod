@@ -153,41 +153,75 @@ def reserva_clase(name):
         time.sleep(25)
 
         ok = False
-        for prefix in list_prefix:
+        if list_days[weekday + 6] != 'Sabado':
+            for prefix in list_prefix:
 
-            button = browser.find_by_xpath('//tr[td[contains(text(), \'{prefix}\')] and '
-                                                'td[contains(text(), \'{int_time}\')]]//td[5]'.
-                                                format(prefix=prefix, int_time=int_time))
-            if len(button)>0:
-                button = button[0]
-                ok = True
-                break
+                button = browser.find_by_xpath('//tr[td[contains(text(), \'{prefix}\')] and '
+                                                    'td[contains(text(), \'{int_time}\')]]//td[5]'.
+                                                    format(prefix=prefix, int_time=int_time))
+                if len(button)>0:
+                    button = button[0]
+                    ok = True
+                    break
 
-        if not ok:
-            logger.error('Configuracion no encontrada')
-            browser.quit()
-            return
-
-        logger.info('Waiting until midnight')
-        wait_until_00_madrid()
-
-        logger.info('Waiting a few seconds')
-        time.sleep(wait_time+10)
-
-        cont = 0
-
-        logger.info('Pushing button to make reservation')
-        button.click()
-        if wait_until_text_present(browser, 'RESERVADA', waiting_time=20):
-            if wait_until_text_present(browser, 'ESPERANDO', waiting_time=3):
-                cont += 1
-                print logger.error('Error in last step of reservation')
-            else:
-                print logger.info('Reservation is in LISTA DE ESPERA')
+            if not ok:
+                logger.error('Configuracion no encontrada')
+                browser.quit()
                 return
+
+            logger.info('Waiting until midnight')
+            wait_until_00_madrid()
+
+            logger.info('Waiting a few seconds')
+            time.sleep(wait_time+10)
+
+            cont = 0
+
+            logger.info('Pushing button to make reservation')
+            button.click()
+            if wait_until_text_present(browser, 'RESERVADA', waiting_time=20):
+                if wait_until_text_present(browser, 'ESPERANDO', waiting_time=3):
+                    cont += 1
+                    print logger.error('Error in last step of reservation')
+                else:
+                    print logger.info('Reservation is in LISTA DE ESPERA')
+                    return
+            else:
+                logger.info('Reservation is ok')
+                return
+
         else:
-            logger.info('Reservation is ok')
-            return
+            button1 = browser.find_by_xpath('//tr[td[contains(text(), \'{prefix}\')] and '
+                                            'td[contains(text(), \'{int_time}\')]]//td[5]'.
+                                            format(prefix='Team', int_time='12:00 a 13:00'))
+
+            button2 = browser.find_by_xpath('//tr[td[contains(text(), \'{prefix}\')] and '
+                                            'td[contains(text(), \'{int_time}\')]]//td[5]'.
+                                            format(prefix='Open', int_time='11:00 a 12:00'))
+
+            logger.info('Waiting until midnight')
+            wait_until_00_madrid()
+
+            logger.info('Waiting a few seconds')
+            time.sleep(wait_time + 10)
+
+            cont = 0
+
+            logger.info('Pushing button to make reservation')
+            button1.click()
+            time.sleep(20)
+            button2.click()
+            if wait_until_text_present(browser, 'RESERVADA', waiting_time=20):
+                if wait_until_text_present(browser, 'ESPERANDO', waiting_time=3):
+                    cont += 1
+                    print logger.error('Error in last step of reservation')
+                else:
+                    print logger.info('Reservation is in LISTA DE ESPERA')
+                    return
+            else:
+                logger.info('Reservation is ok')
+                return
+
         browser.visit(url_out)
         time.sleep(10)
 
