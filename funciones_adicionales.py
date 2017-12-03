@@ -87,7 +87,7 @@ def reserva_clase(name):
     int_time, list_prefix, input_line, wait_time = get_profiles(name)
 
     logger.info('Waiting until 2 minutes before')
-    # wait_until_2358_madrid()
+    wait_until_2358_madrid()
     logger.info('Its time to start')
 
     logger.info('Trying Browser')
@@ -131,6 +131,7 @@ def reserva_clase(name):
         logger.info('Logging in')
         button = browser.find_by_text('ENTRAR')
         button.click()
+        time.sleep(2)
 
         for i in range(0, 6):
             logger.info('Waiting for {}'.format(str(list_days[weekday + i])))
@@ -141,6 +142,7 @@ def reserva_clase(name):
                 return
             button = browser.find_by_css(".next-day")
             button.click()
+            time.sleep(2)
 
         logger.info('Waiting for {}'.format(str(list_days[weekday + 6])))
         if wait_until_text_present(browser, list_days[weekday + 6]):
@@ -195,10 +197,6 @@ def reserva_clase(name):
                                             'td[contains(text(), \'{int_time}\')]]//td[5]'.
                                             format(prefix='Team', int_time='12:00 a 13:00'))
 
-            button2 = browser.find_by_xpath('//tr[td[contains(text(), \'{prefix}\')] and '
-                                            'td[contains(text(), \'{int_time}\')]]//td[5]'.
-                                            format(prefix='Open', int_time='11:00 a 12:00'))
-
             logger.info('Waiting until midnight')
             wait_until_00_madrid()
 
@@ -210,6 +208,10 @@ def reserva_clase(name):
             logger.info('Pushing button to make reservation')
             button1.click()
             time.sleep(20)
+
+            button2 = browser.find_by_xpath('//tr[td[contains(text(), \'{prefix}\')] and '
+                                            'td[contains(text(), \'{int_time}\')]]//td[5]'.
+                                            format(prefix='Open', int_time='11:00 a 12:00'))
             button2.click()
             if wait_until_text_present(browser, 'RESERVADA', waiting_time=20):
                 if wait_until_text_present(browser, 'ESPERANDO', waiting_time=3):
