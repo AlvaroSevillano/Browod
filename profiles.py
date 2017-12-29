@@ -18,7 +18,7 @@ def get_profiles(name):
                        'ana': ['k7_haltero','anaglezgciagc@yahoo.es|Browod456',6],
                        'andoni': ['k7_haltero','andoniruiz@hotmail.com|molotov0',5],
                        'blas': ['k7_haltero','vladisimon@gmail.com|abc123456+',4],
-                       'chema': ['k7_haltero','jmruedahernandez@gmail.com|alvaromola',7],
+                       'chema': ['k7_haltero','jmruedahernandez@gmail.com|alvaromola1000',7],
                        'javi': ['k7_haltero','javialonsoramirez@gmail.com|Golessonamores',6],
                        'jonas': ['k8_haltero','juanfrcarro@gmail.com|jonas47352436j',8],
                        'koldo': ['k7','kolabarri@gmail.com|koldoklan',5],
