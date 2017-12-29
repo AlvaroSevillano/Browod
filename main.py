@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 from pyvirtualdisplay import Display
 display = Display(visible=0, size=(800, 600))
-display.start()
+# display.start()
 
 name = sys.argv[1]
 reserva_clase(name)

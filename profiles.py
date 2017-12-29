@@ -1,9 +1,9 @@
 def get_profiles(name):
-    int_time_k7 = "07:00 a 08:00"
-    int_time_k8 = "08:00 a 09:00"
+    int_time_k7 = "07:00 - 08:00"
+    int_time_k8 = "08:00 - 09:00"
 
     haltero = 'Weig'
-    crossfit = 'Crossfit'
+    crossfit = 'CrossFit'
     gymnastics = 'Gymnas'
     endurance = 'Endurance'
 
@@ -13,7 +13,7 @@ def get_profiles(name):
                 'k8_haltero': [int_time_k8, [haltero, crossfit, gymnastics, endurance]]}
 
     assign_profiles = {'alberto': ['k8_haltero','albertogarciamoreno0@gmail.com|bradybooth12',5],
-                       'alvaro': ['k7_haltero','yuhp14@hotmail.com|25Jan2013%',2],
+                       'alvaro': ['k7_haltero','yuhp14@hotmail.com|alvaro88',2],
                        'amaya': ['k7','amayafrias@gmail.com|melocoton77',4],
                        'ana': ['k7_haltero','anaglezgciagc@yahoo.es|Browod456',6],
                        'andoni': ['k7_haltero','andoniruiz@hotmail.com|molotov0',5],
