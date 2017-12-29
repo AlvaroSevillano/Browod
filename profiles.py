@@ -15,7 +15,7 @@ def get_profiles(name):
     assign_profiles = {'alberto': ['k8_haltero','albertogarciamoreno0@gmail.com|bradybooth12',5],
                        'alvaro': ['k7_haltero','yuhp14@hotmail.com|alvaro88',2],
                        'amaya': ['k7','amayafrias@gmail.com|melocoton77',4],
-                       'ana': ['k7_haltero','anaglezgciagc@yahoo.es|Browod456',6],
+                       'ana': ['k7_haltero','anaglezgciagc@yahoo.es|Aimharder456',6],
                        'andoni': ['k7_haltero','andoniruiz@hotmail.com|molotov0',5],
                        'blas': ['k7_haltero','vladisimon@gmail.com|abc123456+',4],
                        'chema': ['k7_haltero','jmruedahernandez@gmail.com|alvaromola1000',7],
@@ -25,7 +25,7 @@ def get_profiles(name):
                        'laura': ['k7','lauradoxsey@gmail.com|sev1lla!!BD',4],
                        'leixuri': ['k7_haltero','leixuridefrutos@gmail.com|87654321',7],
                        'marta': ['k7','martamedinam@yahoo.es|12345678',4],
-                       'risto': ['k8_haltero','ristotapani@gmail.com|poikanen',6],
+                       'risto': ['k8_haltero','ristotapani@gmail.com|poikanen74',6],
                        'ruben': ['k7_haltero','rubensendin87@gmail.com|19L0ndr3s87',4],
                        'tere': ['k7_haltero','teresa.medina.moreno@hotmail.com|teresa72',7]}
 
