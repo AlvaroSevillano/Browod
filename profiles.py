@@ -19,7 +19,7 @@ def get_profiles(name):
                        'andoni': ['k7_haltero','andoniruiz@hotmail.com|molotov0',5],
                        'blas': ['k7_haltero','vladisimon@gmail.com|abc123456+',4],
                        'chema': ['k7_haltero','jmruedahernandez@gmail.com|alvaromola1000',7],
-                       'javi': ['k7_haltero','javialonsoramirez@gmail.com|Golessonamores',6],
+                       'javi': ['k7_haltero','javialonsoramirez@gmail.com|Capricho1303',6],
                        'jonas': ['k8_haltero','juanfrcarro@gmail.com|jonas47352436j',8],
                        'koldo': ['k7','kolabarri@gmail.com|koldoklan',5],
                        'laura': ['k7','lauradoxsey@gmail.com|sev1lla!!BD',4],
