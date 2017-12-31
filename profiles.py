@@ -23,7 +23,7 @@ def get_profiles(name):
                        'jonas': ['k8_haltero','juanfrcarro@gmail.com|jonas47352436J',8],
                        'koldo': ['k7','kolabarri@gmail.com|koldoklan',5],
                        'laura': ['k7','lauradoxsey@gmail.com|sev1lla!!BD',4],
-                       'leixuri': ['k7_haltero','leixuridefrutos@gmail.com|87654321',7],
+                       'leixuri': ['k7_haltero','leixuridefrutos@gmail.com|vivirViajando1',7],
                        'risto': ['k8_haltero','ristotapani@gmail.com|poikanen74',6],
                        'ruben': ['k7_haltero','rubensendin87@gmail.com|19L0ndr3s87',4]}
 
