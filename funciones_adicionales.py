@@ -153,7 +153,7 @@ def reserva_clase(name):
         return
     browser.visit(url_reservas)
 
-    for i in range(0, 6):
+    for i in range(0, 5):
         logger.info('Waiting for {}'.format(strings_check_date[i]))
         if wait_until_text_present(browser, strings_check_date[i]):
             logger.error('Last day did not appear')
@@ -164,8 +164,8 @@ def reserva_clase(name):
         button.click()
         time.sleep(2)
 
-    logger.info('Waiting for {}'.format(strings_check_date[6]))
-    if wait_until_text_present(browser, strings_check_date[6]):
+    logger.info('Waiting for {}'.format(strings_check_date[5]))
+    if wait_until_text_present(browser, strings_check_date[5]):
         logger.error('Last day did not appear')
         browser.visit(url_out)
         time.sleep(5)
@@ -175,7 +175,7 @@ def reserva_clase(name):
     time.sleep(15)
 
     ok = False
-    if list_days[weekday + 6] != 'Sabado':
+    if list_days[weekday + 5] != 'Sabado':
         for prefix in list_prefix:
             button = browser.find_by_xpath("//div[span[contains(text(), \'{prefix}\')] and "
                                                  "span[contains(text(), \'{int_time}\')]]"
@@ -226,10 +226,7 @@ def reserva_clase(name):
                                         format(prefix='Open', int_time='11:00 - 12:00'))
 
         button2.click()
-        if wait_until_text_present(browser, 'Cancelar reserva', waiting_time=20):
-            print logger.error('Error in last step of reservation')
-        else:
-            logger.info('Reservation is ok')
+        time.sleep(20)
 
     browser.visit(url_out)
     time.sleep(10)
