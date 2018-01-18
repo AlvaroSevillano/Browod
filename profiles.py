@@ -24,6 +24,7 @@ def get_profiles(name):
                        'koldo': ['k7','kolabarri@gmail.com|koldoklan',5],
                        'laura': ['k7','lauradoxsey@gmail.com|sev1lla!!AR',4],
                        'leixuri': ['k7_haltero','leixuridefrutos@gmail.com|vivirViajando1',7],
+                       'marta_chema': ['k7_haltero','ciller.marta@gmail.com|alvaromola1000',7],
                        'risto': ['k8_haltero','ristotapani@gmail.com|poikanen74',6],
                        'ruben': ['k7_haltero','rubensendin87@gmail.com|19L0ndr3s87',4]}
 

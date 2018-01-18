@@ -94,15 +94,17 @@ def get_string_check_date(today):
     return list_strings
 
 
-def reserva_clase(name):
+def reserva_clase(name, dev):
 
     today = datetime.datetime.today()
     weekday = today.weekday()
     strings_check_date = get_string_check_date(today)
     int_time, list_prefix, input_line, wait_time = get_profiles(name)
 
-    logger.info('Waiting until 2 minutes before')
-    wait_until_2358_madrid()
+    if not dev:
+        logger.info('Waiting until 2 minutes before')
+        wait_until_2358_madrid()
+
     logger.info('Its time to start')
 
     logger.info('Trying Browser')
@@ -153,7 +155,12 @@ def reserva_clase(name):
         return
     browser.visit(url_reservas)
 
-    for i in range(0, 6):
+    if dev:
+        n_days = 5
+    else:
+        n_days = 6
+
+    for i in range(0, n_days):
         logger.info('Waiting for {}'.format(strings_check_date[i]))
         if wait_until_text_present(browser, strings_check_date[i]):
             logger.error('Last day did not appear')
@@ -164,8 +171,8 @@ def reserva_clase(name):
         button.click()
         time.sleep(2)
 
-    logger.info('Waiting for {}'.format(strings_check_date[6]))
-    if wait_until_text_present(browser, strings_check_date[6]):
+    logger.info('Waiting for {}'.format(strings_check_date[n_days]))
+    if wait_until_text_present(browser, strings_check_date[n_days]):
         logger.error('Last day did not appear')
         browser.visit(url_out)
         time.sleep(5)
@@ -176,9 +183,15 @@ def reserva_clase(name):
 
     ok = False
     if list_days[weekday + 6] != 'Sabado':
+
+
+        if not dev:
+            logger.info('Waiting until midnight')
+            wait_until_00_madrid()
+
         for prefix in list_prefix:
             button = browser.find_by_xpath("//div[span[contains(text(), \'{prefix}\')] and "
-                                                 "span[contains(text(), \'{int_time}\')]]"
+                                           "span[contains(text(), \'{int_time}\')]]"
                                            "//a[contains(text(), 'Reservar')]".
                                            format(prefix=prefix, int_time=int_time))
             if len(button) > 0:
@@ -191,11 +204,8 @@ def reserva_clase(name):
             browser.quit()
             return
 
-        logger.info('Waiting until midnight')
-        wait_until_00_madrid()
-
         logger.info('Waiting a few seconds')
-        time.sleep(wait_time+10)
+        time.sleep(wait_time+8)
 
         logger.info('Pushing button to make reservation')
         button.click()
@@ -205,16 +215,17 @@ def reserva_clase(name):
             logger.info('Reservation is ok')
 
     else:
-        button1 = browser.find_by_xpath("//div[span[contains(text(), \'{prefix}\')] and "
-                                                 "span[contains(text(), \'{int_time}\')]]"
-                                           "//a[contains(text(), 'Reservar')]".
-                                           format(prefix='Team', int_time='12:00 - 13:00'))
+        if not dev:
+            logger.info('Waiting until midnight')
+            wait_until_00_madrid()
 
-        logger.info('Waiting until midnight')
-        wait_until_00_madrid()
+        button1 = browser.find_by_xpath("//div[span[contains(text(), \'{prefix}\')] and "
+                                        "span[contains(text(), \'{int_time}\')]]"
+                                        "//a[contains(text(), 'Reservar')]".
+                                        format(prefix='Team', int_time='12:00 - 13:00'))
 
         logger.info('Waiting a few seconds')
-        time.sleep(wait_time + 10)
+        time.sleep(wait_time + 8)
 
         logger.info('Pushing button to make reservation')
         button1.click()
@@ -228,6 +239,7 @@ def reserva_clase(name):
         button2.click()
         time.sleep(20)
 
+    time.sleep(10)
     browser.visit(url_out)
     time.sleep(10)
 
