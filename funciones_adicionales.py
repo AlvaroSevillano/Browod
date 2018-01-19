@@ -103,7 +103,7 @@ def reserva_clase(name, dev):
 
     if not dev:
         logger.info('Waiting until 2 minutes before')
-        wait_until_2358_madrid()
+        wait_until_00_madrid()
 
     logger.info('Its time to start')
 
