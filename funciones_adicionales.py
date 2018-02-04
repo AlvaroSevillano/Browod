@@ -178,12 +178,12 @@ def reserva_clase(name, dev):
         time.sleep(5)
         return
 
-    logger.info('Waiting 15 seconds for everything correct')
-    time.sleep(15)
+    logger.info('Waiting 10 seconds for everything correct')
+    time.sleep(10)
 
     ok = False
-    if list_days[weekday + 6] != 'Sabado':
-
+    if list_days[weekday + n_days] != 'Sabado':
+        logger.info('The reservation day is not Saturday')
 
         if not dev:
             logger.info('Waiting until midnight')
@@ -205,7 +205,7 @@ def reserva_clase(name, dev):
             return
 
         logger.info('Waiting a few seconds')
-        time.sleep(wait_time+8)
+        time.sleep(wait_time+3)
 
         logger.info('Pushing button to make reservation')
         button.click()
@@ -215,6 +215,7 @@ def reserva_clase(name, dev):
             logger.info('Reservation is ok')
 
     else:
+        logger.info('The reservation day is Saturday')
         if not dev:
             logger.info('Waiting until midnight')
             wait_until_00_madrid()
